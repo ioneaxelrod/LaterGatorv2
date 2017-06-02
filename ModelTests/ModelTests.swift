@@ -25,15 +25,31 @@ class ModelTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         let monster = Monster()
-        
+        monster.monsterScore = 10
+        XCTAssertEqual(monster.checkMonsterScore(), 10)
         
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testIncrementMove() {
+        let monster = Monster()
+        monster.monsterScore = 15
+        monster.incrementMove()
+        XCTAssertEqual(monster.checkMonsterScore(), 20)
     }
+    
+    func testMoveAway() {
+        let monster = Monster()
+        monster.monsterScore = 15
+        monster.moveAway(number: 5)
+        XCTAssertEqual(monster.checkMonsterScore(), 10)
+    }
+    
+    func testMoveCloser() {
+        let monster = Monster()
+        monster.monsterScore = 15
+        monster.moveCloser(number: 5)
+        XCTAssertEqual(monster.checkMonsterScore(), 20)
+    }
+
     
 }
