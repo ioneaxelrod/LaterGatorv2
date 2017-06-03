@@ -172,28 +172,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     /**************************Debug Functions**************************/
-    func addTestObstacles() {
-        var count = 0
-        for string in ImageNameConstants.items {
-            let obstacle = Obstacle(spriteFileName: string)
-            let speed = 2.0 + Double(count)
-            let centerOfSprite = obstacle.sprite.size.width / 2
-            
-            obstacle.sprite.position = CGPoint(x: centerOfSprite + size.width + CGFloat(100 * count),
-                                               y: size.height * PLAYER_START_HEIGHT_ADJUSTMENT)
-            addChild(obstacle.sprite)
-            
-            let actionMove = SKAction.move(to: CGPoint(x: -(centerOfSprite),
-                                                       y: size.height * PLAYER_START_HEIGHT_ADJUSTMENT),
-                                           duration: TimeInterval(speed))
-            let actionMoveDone = SKAction.removeFromParent()
-            obstacle.sprite.run(SKAction.sequence([actionMove, actionMoveDone]))
-            
-            log.logMessage(message: "\(string) test model generated")
-            count += 1
-            
-        }
-    }
+//    func addTestObstacles() {
+//        var count = 0
+//        for string in ImageNameConstants.items {
+//            let obstacle = Obstacle(spriteFileName: string)
+//            let speed = 2.0 + Double(count)
+//            let centerOfSprite = obstacle.sprite.size.width / 2
+//
+//            obstacle.sprite.position = CGPoint(x: centerOfSprite + size.width + CGFloat(100 * count),
+//                                               y: size.height * PLAYER_START_HEIGHT_ADJUSTMENT)
+//            addChild(obstacle.sprite)
+//
+//            let actionMove = SKAction.move(to: CGPoint(x: -(centerOfSprite),
+//                                                       y: size.height * PLAYER_START_HEIGHT_ADJUSTMENT),
+//                                           duration: TimeInterval(speed))
+//            let actionMoveDone = SKAction.removeFromParent()
+//            obstacle.sprite.run(SKAction.sequence([actionMove, actionMoveDone]))
+//
+//            log.logMessage(message: "\(string) test model generated")
+//            count += 1
+//
+//        }
+//    }
     
     func enableStatusLabel() {
         labelNode.fontSize = STATUS_LABEL_FONT_SIZE
@@ -212,10 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      */
     func addObject() {
         // choose type of object
-        let itemName = generateWhichObject()
-        // object
-        let obstacle = Obstacle(spriteFileName: itemName)
-        
+        let obstacle = generateWhichObject()
         let centerOfSprite = obstacle.sprite.size.height / 2
         // where monster/objects will spawn along y axis
         var randomY = random(min: centerOfSprite,
@@ -229,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // object position (spawn off immediately screen on x axis, and random point on y)
-        obstacle.sprite.position = CGPoint(x: self.size.width + obstacle.sprite.size.width / 2,
+        obstacle.sprite.position = CGPoint(x: self.size.width + centerOfSprite,
                                            y: randomY)
         
         // object spawns
@@ -249,8 +246,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             repeatActions(functionToRepeat: { AnimationUtils.animateSpiderSkitter(spiderSprite: obstacle.sprite) }, waitInterval: 0.05)
         }
         
-        obstacle.glide(name: obstacle.sprite.name!,
-                       point: CGPoint(x: -centerOfSprite, y: randomY))
+    
+        obstacle.glide(point: CGPoint(x: -centerOfSprite, y: randomY))
         
         // glide is the actual moving of the sprite
         
@@ -261,11 +258,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  * randomly chooses a type of object to create that moves across screen
  *
  */
-    func generateWhichObject() -> String {
+    func generateWhichObject() -> GameObstacle {
         let randomIndex = Int(arc4random_uniform(UInt32(ImageNameConstants.items.count)))
         log.logMessage(message: "\(ImageNameConstants.items[randomIndex]) Randomly Selected")
-        return ImageNameConstants.items[randomIndex]
+        switch ImageNameConstants.items[randomIndex] {
+            case ImageNameConstants.GHOST_SPRITE_NAME:
+                return Ghost()
         
+            case ImageNameConstants.TRASH_CAN_SPRITE_NAME:
+                return TrashCan()
+            case ImageNameConstants.BAT_SPRITE_NAME:
+                return Bat()
+            case ImageNameConstants.OIL_SLICK_SPRITE_NAME:
+                return OilSlick()
+            case ImageNameConstants.SPIDER_SPRITE_NAME:
+                return Spider()
+            default:
+                return GameObstacle()
+        }
     }
     
     /**************************Background Functions**************************/
@@ -431,7 +441,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case ImageNameConstants.BAT_SPRITE_NAME:
             thePlayer.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
             theMonster.moveCloser(number: GameBalanceConstants.MINOR_HIT)
-            //run(SKAction.playSoundFileNamed("batcry.mp3", waitForCompletion: false))
             playPlayerHurtSound()
             object.removeFromParent()
             log.logMessage(message: "\(ImageNameConstants.BAT_SPRITE_NAME) collided with Player")
@@ -439,7 +448,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case ImageNameConstants.GHOST_SPRITE_NAME:
             thePlayer.decreaseScore(points: GameBalanceConstants.MINOR_HIT)
             log.logMessage(message: "\(ImageNameConstants.GHOST_SPRITE_NAME) collided with Player")
-            // run(SKAction.playSoundFileNamed("ghostmoan2.mp3", waitForCompletion: false))
             playPlayerHurtSound()
             object.removeFromParent()
             break
