@@ -10,45 +10,45 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Monster {
-    
-    let sprite = SKSpriteNode(imageNamed: ImageNameConstants.MONSTER_SPRITE_NAME)
-    var monsterScore: Int = ZeroConstants.ZERO_INT
-    
-    init() {
-        self.sprite.name = ImageNameConstants.MONSTER_SPRITE_NAME
-        self.sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
-        self.sprite.physicsBody?.isDynamic = false
-        self.sprite.zPosition = 4
-        //collision-related properties
-        PhysicsUtils.setMonsterCollision(sprite: self.sprite)
-    }
-    
-    func moveCloser(number: Int) {
-        self.monsterScore += number
-    }
-    
-    func moveAway(number: Int) {
-        self.monsterScore -= number
-        damageMonster()
-    }
-    
-    func incrementMove() {
-        self.monsterScore += 5
-    }
-    
-    func checkMonsterScore() -> Int {
-        return self.monsterScore
-    }
-    
-    func damageMonster() {
-        let pulsedRed = SKAction.sequence([
-                                                  SKAction.colorize(with: .red, colorBlendFactor: 1.0, duration: 0.20),
-                                                  SKAction.wait(forDuration: 0.1),
-                                                  SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.20)])
-        self.sprite.run(pulsedRed)
-    }
-}
+//class Monster {
+//
+//    let sprite = SKSpriteNode(imageNamed: ImageNameConstants.MONSTER_SPRITE_NAME)
+//    var score: Int = ZeroConstants.ZERO_INT
+//
+//    init() {
+//        self.sprite.name = ImageNameConstants.MONSTER_SPRITE_NAME
+//        self.sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+//        self.sprite.physicsBody?.isDynamic = false
+//        self.sprite.zPosition = 4
+//        //collision-related properties
+//        PhysicsUtils.setMonsterCollision(sprite: self.sprite)
+//    }
+//
+//    func increaseScore(points: Int) {
+//        self.score += points
+//    }
+//
+//    func decreaseScore(points: Int) {
+//        self.score -= points
+//        damageMonster()
+//    }
+//
+//    func incrementMove() {
+//        self.score += 5
+//    }
+//
+//    func checkMonsterScore() -> Int {
+//        return self.score
+//    }
+//
+//    func damageMonster() {
+//        let pulsedRed = SKAction.sequence([
+//                                                  SKAction.colorize(with: .red, colorBlendFactor: 1.0, duration: 0.20),
+//                                                  SKAction.wait(forDuration: 0.1),
+//                                                  SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.20)])
+//        self.sprite.run(pulsedRed)
+//    }
+//}
 
 /*
  

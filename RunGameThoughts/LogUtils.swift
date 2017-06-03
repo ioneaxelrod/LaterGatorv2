@@ -26,7 +26,7 @@ class Logger {
     
     func baseLineLogger() -> String {
         if self.monster != nil || self.player != nil {
-            return "[M: \(self.monster!.monsterScore)] [P: \(self.player!.score)]"
+            return "[M: \(self.monster!.score)] [P: \(self.player!.score)]"
         }
         return ""
     }

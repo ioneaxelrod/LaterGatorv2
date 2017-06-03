@@ -317,7 +317,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  */
     func monsterMove() {
         let monsterXCoord
-                = self.size.width / 2.5 * CGFloat(theMonster.monsterScore) * MONSTER_MOVEMENT_RATIO_ADJUSTMENT - theMonster.sprite.size.width / 2
+                = self.size.width / 2.5 * CGFloat(theMonster.score) * MONSTER_MOVEMENT_RATIO_ADJUSTMENT - theMonster.sprite.size.width / 2
         let monsterYCoord = theMonster.sprite.size.height / 2
         let monsterMovement = SKAction.move(to: CGPoint(x: monsterXCoord, y: monsterYCoord), duration: GameTime.TIME_MONSTER_IS_MOVING)
         theMonster.sprite.run(monsterMovement)
@@ -329,7 +329,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  *
  */
     func updateLabel() {
-        statusLabel.text = "Monster Points: \(theMonster.monsterScore) \n Player Points: \(thePlayer.score)"
+        statusLabel.text = "Monster Points: \(theMonster.score) \n Player Points: \(thePlayer.score)"
     }
     
     /* Check End Condition
@@ -342,7 +342,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver(win: true)
         }
         
-        if theMonster.monsterScore >= GameBalanceConstants.WIN_SCORE_SCALE {
+        if theMonster.score >= GameBalanceConstants.WIN_SCORE_SCALE {
             gameOver(win: false)
         }
     }
@@ -356,7 +356,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func moveToggle() {
         
         let xBarBeginning = self.size.width * BEGINNING_TOGGLE_ADJUSTMENT
-        let togglePosition = theSlider.sprite.size.width * CGFloat(theMonster.monsterScore) / CGFloat(GameBalanceConstants.WIN_SCORE_SCALE)
+        let togglePosition = theSlider.sprite.size.width * CGFloat(theMonster.score) / CGFloat(GameBalanceConstants.WIN_SCORE_SCALE)
         
         var moveToX = xBarBeginning + togglePosition
         let moveToY = self.size.height * SLIDER_BAR_POSITION_ADJUSTMENT
@@ -423,7 +423,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch object.name! {
         case ImageNameConstants.BAT_SPRITE_NAME:
             thePlayer.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-            theMonster.moveCloser(number: GameBalanceConstants.MINOR_HIT)
+            theMonster.increaseScore(points: GameBalanceConstants.MINOR_HIT)
             //run(SKAction.playSoundFileNamed("batcry.mp3", waitForCompletion: false))
             playPlayerHurtSound()
             object.removeFromParent()
@@ -439,12 +439,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case ImageNameConstants.TRASH_CAN_SPRITE_NAME:
             
             thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-            theMonster.moveAway(number: GameBalanceConstants.MEDIUM_HIT)
+            theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
             log.logMessage(message: "\(ImageNameConstants.TRASH_CAN_SPRITE_NAME) collided with Player")
             break
         case ImageNameConstants.OIL_SLICK_SPRITE_NAME:
             thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-            theMonster.moveAway(number: GameBalanceConstants.MEDIUM_HIT)
+            theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
             log.logMessage(message: "\(ImageNameConstants.OIL_SLICK_SPRITE_NAME) collided with Player")
         default:
             log.logMessage(message: "ERROR: Collision Not Supposed to Happen")
@@ -577,7 +577,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func criticalHit(node: SKNode) {
         thePlayer.increaseScore(points: GameBalanceConstants.CRITICAL_HIT)
-        theMonster.moveAway(number: GameBalanceConstants.CRITICAL_HIT)
+        theMonster.decreaseScore(points: GameBalanceConstants.CRITICAL_HIT)
         node.zRotation = .pi
         log.logMessage(message: "Critical Hit Activated")
     }
@@ -594,7 +594,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //trashSprite.zRotation = .pi / 2
         AnimationUtils.animateTipTrash(trashSprite: trashSprite as! SKSpriteNode)
         thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-        theMonster.moveAway(number: GameBalanceConstants.MEDIUM_HIT)
+        theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
         run(SKAction.playSoundFileNamed("glassbreak.mp3", waitForCompletion: false))
         playMonsterHurtSound()
         log.logMessage(message: "Player used Trash Can")
@@ -602,7 +602,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func activateOilSlick(oilSprite: SKNode) {
         thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-        theMonster.moveAway(number: GameBalanceConstants.MEDIUM_HIT)
+        theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
         repeatActions(functionToRepeat: {
             AnimationUtils.animateOilFire(oilSprite: oilSprite as! SKSpriteNode)
         },
