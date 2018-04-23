@@ -1,0 +1,1 @@
+swiftlint --no-cache --config .swiftlint.yml 
