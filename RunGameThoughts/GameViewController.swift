@@ -11,35 +11,31 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let mainScene = TitleScreenScene(size: view.bounds.size)
         //let mainScene = GameScene(size: view.bounds.size)
 
-        let skView = view as! SKView
-        
+        guard let skView = view as? SKView else { return }
+
         skView.ignoresSiblingOrder = true
-        
         mainScene.scaleMode = .resizeFill
         skView.presentScene(mainScene)
-        
     }
-    
+
     override var shouldAutorotate: Bool {
         return false
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-    
+
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
+
 }
-
-

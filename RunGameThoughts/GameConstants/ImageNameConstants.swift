@@ -11,7 +11,7 @@ import Foundation
 class ImageNameConstants {
     private init() {
     }
-    
+
     static let GHOST_SPRITE_NAME = "ghostscalar1"
     static let PLAYER_SPRITE_NAME = "pixiegirl1"
     static let RESET_BUTTON_SPRITE_NAME = "resetButton"
@@ -33,15 +33,15 @@ class ImageNameConstants {
     static let PLAYER_TEXTURE4_NAME = "pixiegirl4"
     static let PLAYER_TEXTURE5_NAME = "pixiegirl5"
     static let PLAYER_TEXTURE6_NAME = "pixiegirl6"
-    
+
     static let PLAYER_TEXTURES = ["pixiegirl1", "pixiegirl2", "pixiegirl3", "pixiegirl14, pixiegirl5", "pixiegirl6"]
-    
+
     static let MONSTER_TEXTURE1_NAME = MONSTER_SPRITE_NAME
     static let MONSTER_TEXTURE2_NAME = "monsterscalar2"
     static let MONSTER_TEXTURE3_NAME = "monsterscalar3"
     static let MONSTER_TEXTURE4_NAME = "monsterscalar4"
     static let MONSTER_TEXTURE5_NAME = "monsterscalar5"
-    
+
     static let MONSTER_TEXTURES = ["monsterscalar1", "monsterscalar2", "monsterscalar3", "monsterscalar4", "monsterscalar5"]
 
 // Obstactle textures
@@ -50,20 +50,20 @@ class ImageNameConstants {
     static let TRASH_CAN_TEXTURE3_NAME = "trash-can3"
     static let TRASH_CAN_TEXTURE4_NAME = "trash-can4"
     static let TRASH_CAN_TEXTURES = ["trash-can1", "trash-can2", "trash-can3", "trash-can4"]
-    
+
     static let OIL_SLICK_TEXTURE2_NAME = "oilslickscalar2"
     static let OIL_SLICK_TEXTURE3_NAME = "oilslickscalar3"
     static let OIL_SLICK_TEXTURE4_NAME = "oilslickscalar4"
     static let OIL_SLICK_TEXTURES = ["oilslickscalar2", "oilslickscalar3", "oilslickscalar4"]
-    
+
     static let BAT_TEXTURES = ["batscalar1", "batscalar2", "batscalar3"]
-    
+
     static let SPIDER_TEXTURES = ["spiderscalar1", "spiderscalar2", "spiderscalar3", "spiderscalar4"]
-    
+
     static let BLOOD_TEXTURES = ["blood1", "blood2", "blood3"]
-    
+
     static let GHOST_TEXTURES = ["ghostscalar1", "ghostscalar2", "ghostscalar3", "ghostscalar4", "ghostscalar5"]
-    
+
     static let PLAYER_ATLAS_NAME = "playerAnimation"
     static let MONSTER_ATLAS_NAME = "monsterAnimation"
     static let TRASH_CAN_ATLAS_NAME = "trashCanAnimation"
@@ -73,13 +73,13 @@ class ImageNameConstants {
     static let BAT_ATLAS_NAME = "batAnimation"
     static let SPIDER_ATLAS_NAME = "spiderAnimation"
     static let BLOOD_ATLAS_NAME = "bloodAnimation"
-    
+
     static let GAME_OVER_WORDS = "gameOverWords1"
-    
+
     static let items = [GHOST_SPRITE_NAME, TRASH_CAN_SPRITE_NAME, BAT_SPRITE_NAME, OIL_SLICK_SPRITE_NAME, SPIDER_SPRITE_NAME]
-    
+
     static let cries = ["cry1.mp3", "cry2.mp3", "cry34.mp3"]
-    
+
     // Button Textures
-    
+
 }

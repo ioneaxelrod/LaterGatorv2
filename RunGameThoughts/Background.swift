@@ -13,7 +13,7 @@ class Background {
     let sprites: [SKSpriteNode] = [SKSpriteNode(imageNamed: "newbackgroundscalar1"),
                                    SKSpriteNode(imageNamed: "newbackgroundscalar1"),
                                    SKSpriteNode(imageNamed: "newbackgroundscalar1")]
-    
+
     init() {
         for sprite in sprites {
             sprite.name = "background"

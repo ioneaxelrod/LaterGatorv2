@@ -11,29 +11,29 @@ import SpriteKit
 import GameplayKit
 
 class Player: GameScoreObject {
-    
+
     override init() {
         super.init()
         self.sprite = SKSpriteNode(imageNamed: ImageNameConstants.PLAYER_SPRITE_NAME)
         let hitBoxSize = CGSize(width: sprite.size.width * 0.55,
                                 height: sprite.size.height * 0.8)
-        
+
         self.sprite.name = ImageNameConstants.PLAYER_SPRITE_NAME
         self.sprite.physicsBody = SKPhysicsBody(rectangleOf: hitBoxSize,
                                                 center: CGPoint(x: sprite.size.width * 0.1, y: 0.5))
         self.sprite.physicsBody?.isDynamic = true
         self.sprite.physicsBody?.affectedByGravity = false
         self.sprite.zPosition = 4
-        
+
         //collision-related properties
         PhysicsUtils.setPlayerCollision(sprite: self.sprite)
     }
-    
+
     override func decreaseScore(points: Int) {
         self.score -= points
         damagePlayer()
     }
-    
+
     func damagePlayer() {
         let pulsedRed = SKAction.sequence([
                                                   SKAction.colorize(with: .red, colorBlendFactor: 1.0, duration: 0.20),
@@ -42,4 +42,3 @@ class Player: GameScoreObject {
         self.sprite.run(pulsedRed)
     }
 }
-

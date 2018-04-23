@@ -11,29 +11,24 @@ import SpriteKit
 @testable import RunGameThoughts
 
 class GameSceneTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testDidMove() {
         let frame = CGSize(width: 1334, height: 750)
         let testScene = GameScene(size: frame)
         testScene.didMove(to: SKView())
 
-        
-        
-        
-        
-        
     }
-    
+
 //    override func didMove(to view: SKView) {
 //        if GameBalanceConstants.debugMode {
 //            let skView = self.view!
@@ -102,5 +97,4 @@ class GameSceneTests: XCTestCase {
 //        theMonster.sprite.run(monsterMovement)
 //    }
 
-    
 }

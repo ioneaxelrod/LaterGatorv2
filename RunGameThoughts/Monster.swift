@@ -10,9 +10,8 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-
 class Monster: GameScoreObject {
-    
+
     override init() {
         super.init()
         self.sprite = SKSpriteNode(imageNamed: ImageNameConstants.MONSTER_SPRITE_NAME)
@@ -23,20 +22,20 @@ class Monster: GameScoreObject {
         //collision-related properties
         PhysicsUtils.setMonsterCollision(sprite: self.sprite)
     }
-    
+
     func incrementMove() {
         self.score += 5
     }
-    
+
     func checkMonsterScore() -> Int {
         return self.score
     }
-    
+
     override func decreaseScore(points: Int) {
         self.score -= points
         damageMonster()
     }
-    
+
     func damageMonster() {
         let pulsedRed = SKAction.sequence([
                                                   SKAction.colorize(with: .red, colorBlendFactor: 1.0, duration: 0.20),
@@ -44,7 +43,7 @@ class Monster: GameScoreObject {
                                                   SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.20)])
         self.sprite.run(pulsedRed)
     }
-    
+
 }
 
 /*
@@ -95,4 +94,3 @@ class Monster: GameScoreObject {
  3.
  
  */
-

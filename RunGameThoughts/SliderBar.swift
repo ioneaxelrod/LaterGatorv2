@@ -10,14 +10,14 @@ import Foundation
 import SpriteKit
 
 class SliderBar {
-    
+
     var sprite = SKSpriteNode(imageNamed: ImageNameConstants.SLIDER_BAR_SPRITE_NAME)
     var toggle = Toggle()
-    
+
     init() {
         self.sprite.zPosition = POSITION_FOR_BACKGROUND_ITEMS
     }
-    
+
     class Toggle {
         var sprite = SKSpriteNode(imageNamed: ImageNameConstants.SKULL_SPRITE_NAME)
         init() {
@@ -26,14 +26,5 @@ class SliderBar {
                     height: self.sprite.size.height * SKULL_SIZE_ADJUSTMENT)
         }
     }
-    
+
 }
-
-
-    
-    
-    
-    
-
-    
-
