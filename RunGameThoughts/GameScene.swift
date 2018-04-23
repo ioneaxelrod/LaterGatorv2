@@ -1,24 +1,13 @@
-//
-        //  GameScene.swift
-        //  RunGameThoughts
-        //
+
         //  Created by Ione Axelrod on 4/19/17.
-        //  Copyright © 2017 Ione Axelrod. All rights reserved.
-        //
+        //  Copyright © 2018 Ione Axelrod. All rights reserved.
 
         import SpriteKit
         import GameplayKit
 
-        /* Game Scene Class ===========
-         *
-         *
-         *
-         */
-
         class GameScene: SKScene, SKPhysicsContactDelegate {
 
-            /**************************Game Setup Functions**************************/
-
+            // MARK: Game Setup Functions
             var thePlayer = Player()
             var theMonster = Monster()
             var log = Logger.getLogger()
@@ -30,11 +19,7 @@
             let thePauseButton = PauseButton()
             let backgroundMusic = SKAudioNode(fileNamed: "Homework.mp3")
 
-            /* Did Move
-             *
-             * Runs the game and sets up local variables on screen
-             *
-             */
+            //Runs the game and sets up local variables on screen
             override func didMove(to view: SKView) {
                 if GameBalanceConstants.debugMode {
                     let skView = self.view!
@@ -45,70 +30,44 @@
                 }
 
                 log.setLogger(monster: theMonster, player: thePlayer)
-                log.logMessage(message: "Screen Width: [\(self.size.width)]    Screen Height:[\(self.size.height)]")
+                log.log("Screen Width: [\(self.size.width)]    Screen Height:[\(self.size.height)]")
+                log.log("\(thePlayer.sprite.physicsBody!.categoryBitMask)")
 
-                log.logMessage(message: "\(thePlayer.sprite.physicsBody!.categoryBitMask)")
-
-                // Physics
                 physicsWorld.contactDelegate = self
-
-                // Background Color
                 backgroundColor = SKColor.white
-
-                // Background Music
                 backgroundMusic.autoplayLooped = true
                 addChild(backgroundMusic)
 
-                // Gesture
                 let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipedUp))
                 swipeUp.direction = .up
                 view.addGestureRecognizer(swipeUp)
 
-                // Sprite Positions
                 setSpritePositions()
-
-                // Place Sprites into Scene
                 addSpriteChildren()
 
-                // Set Up Repeating Functions
                 runRepeatingFunctions()
 
-                // Debug
-                //addTestObstacles()
-                // Check If Run
-                log.logMessage(message: "Game Running")
+                log.log("Game Running")
             }
 
             func setSpritePositions() {
                 let centerOfScreenX = self.size.width / 2
-                // Player
-                thePlayer.sprite.position = CGPoint(x: self.size.width / 2.5,
-                                                    y: self.size.height * PLAYER_START_HEIGHT_ADJUSTMENT)
-                // Monster
-                theMonster.sprite.position = CGPoint(x: -centerOfScreenX,
-                                                     y: self.size.height / 2)
+            
+                thePlayer.sprite.position = CGPoint(x: self.size.width / 2.5, y: self.size.height * PLAYER_START_HEIGHT_ADJUSTMENT)
+                theMonster.sprite.position = CGPoint(x: -centerOfScreenX, y: self.size.height / 2)
 
-                // SliderBar
-                theSlider.sprite.position = CGPoint(x: centerOfScreenX,
-                                                    y: self.size.height * SLIDER_BAR_POSITION_ADJUSTMENT)
+                theSlider.sprite.position = CGPoint(x: centerOfScreenX, y: self.size.height * SLIDER_BAR_POSITION_ADJUSTMENT)
                 theSlider.sprite.size = CGSize(width: self.size.width * SLIDER_BAR_POSITION_ADJUSTMENT,
                                                height: theSlider.sprite.size.height)
-                theSlider.toggle.sprite.position = CGPoint(x: centerOfScreenX * BEGINNING_TOGGLE_ADJUSTMENT,
-                                                           y: self.size.height * SLIDER_BAR_POSITION_ADJUSTMENT)
+                theSlider.toggle.sprite.position = CGPoint(x: centerOfScreenX * BEGINNING_TOGGLE_ADJUSTMENT, y: self.size.height * SLIDER_BAR_POSITION_ADJUSTMENT)
 
-                // Reset Button
-                theResetButton.sprite.position = CGPoint(x: self.size.width * RESET_BUTTON_PLACEMENT_WIDTH_ADJUSTMENT,
-                                                         y: self.size.height * RESET_BUTTON_PLACEMENT_HEIGHT_ADJUSTMENT)
-                // Pause Button
-                thePauseButton.sprite.position = CGPoint(x: self.size.width * (RESET_BUTTON_PLACEMENT_WIDTH_ADJUSTMENT + 0.05),
-                                                         y: self.size.height * RESET_BUTTON_PLACEMENT_HEIGHT_ADJUSTMENT)
+                theResetButton.sprite.position = CGPoint(x: self.size.width * RESET_BUTTON_PLACEMENT_WIDTH_ADJUSTMENT, y: self.size.height * RESET_BUTTON_PLACEMENT_HEIGHT_ADJUSTMENT)
 
-                // Debug Button
-                theDebugButton.position = CGPoint(x: self.size.width * (RESET_BUTTON_PLACEMENT_WIDTH_ADJUSTMENT - 0.05),
-                                                  y: self.size.height * RESET_BUTTON_PLACEMENT_HEIGHT_ADJUSTMENT)
+                thePauseButton.sprite.position = CGPoint(x: self.size.width * (RESET_BUTTON_PLACEMENT_WIDTH_ADJUSTMENT + 0.05), y: self.size.height * RESET_BUTTON_PLACEMENT_HEIGHT_ADJUSTMENT)
+
+                theDebugButton.position = CGPoint(x: self.size.width * (RESET_BUTTON_PLACEMENT_WIDTH_ADJUSTMENT - 0.05), y: self.size.height * RESET_BUTTON_PLACEMENT_HEIGHT_ADJUSTMENT)
                 theDebugButton.name = ImageNameConstants.PLAY_BUTTON_SPRITE_NAME
-                theDebugButton.size = CGSize(width: theDebugButton.size.width * 0.2,
-                                             height: theDebugButton.size.height * 0.2)
+                theDebugButton.size = CGSize(width: theDebugButton.size.width * 0.2, height: theDebugButton.size.height * 0.2)
 
                 // Background
                 createGrounds()
@@ -123,7 +82,7 @@
                 addChild(theResetButton.sprite)
                 addChild(thePauseButton.sprite)
                 addChild(theDebugButton)
-                log.logMessage(message: "Sprite Children Added")
+                log.log("Sprite Children Added")
 
             }
 
@@ -203,15 +162,15 @@
                 addChild(obstacle.sprite)
 
                 if obstacle.sprite.name == ImageNameConstants.GHOST_SPRITE_NAME {
-                    log.logMessage(message: "Animate Ghost")
+                    log.log("Animate Ghost")
                     repeatActions(functionToRepeat: { AnimationUtils.animateGhostFloat(ghostSprite: obstacle.sprite) }, waitInterval: 0.05)
                 }
                 if obstacle.sprite.name == ImageNameConstants.BAT_SPRITE_NAME {
-                    log.logMessage(message: "Animate Bat")
+                    log.log("Animate Bat")
                     repeatActions(functionToRepeat: { AnimationUtils.animateBatFlap(batSprite: obstacle.sprite) }, waitInterval: 0.05)
                 }
                 if obstacle.sprite.name == ImageNameConstants.SPIDER_SPRITE_NAME {
-                    log.logMessage(message: "Animate Spider")
+                    log.log("Animate Spider")
                     repeatActions(functionToRepeat: { AnimationUtils.animateSpiderSkitter(spiderSprite: obstacle.sprite) }, waitInterval: 0.05)
                 }
 
@@ -223,7 +182,7 @@
             //randomly chooses a type of object to create that moves across screen
             func generateWhichObject() -> GameObstacle {
                 let randomIndex = Int(arc4random_uniform(UInt32(ImageNameConstants.items.count)))
-                log.logMessage(message: "\(ImageNameConstants.items[randomIndex]) Randomly Selected")
+                log.log("\(ImageNameConstants.items[randomIndex]) Randomly Selected")
                 switch ImageNameConstants.items[randomIndex] {
                 case ImageNameConstants.GHOST_SPRITE_NAME: return Ghost()
                 case ImageNameConstants.TRASH_CAN_SPRITE_NAME: return TrashCan()
@@ -269,7 +228,6 @@
                 updateLabel()
                 moveToggle()
                 checkAndTriggerEndCondition()
-                log.logMessage(message: "")
             }
 
             func monsterMove() {
@@ -277,7 +235,7 @@
                 let monsterYCoord = theMonster.sprite.size.height / 2
                 let monsterMovement = SKAction.move(to: CGPoint(x: monsterXCoord, y: monsterYCoord), duration: GameTime.TIME_MONSTER_IS_MOVING)
                 theMonster.sprite.run(monsterMovement)
-                log.logMessage(message: "Monster Position: \(theMonster.sprite.position)")
+                log.log("Monster Position: \(theMonster.sprite.position)")
             }
 
             func updateLabel() {
@@ -319,18 +277,18 @@
             }
 
             func didBegin(_ contact: SKPhysicsContact) {
-                log.logMessage(message: "Contact Between Objects \(contact.bodyA) and \(contact.bodyB) Initiated")
+                log.log("Contact Between Objects \(contact.bodyA) and \(contact.bodyB) Initiated")
 
                 if isPlayerBodyA(contact: contact) {
                     guard let objectNode = contact.bodyB.node as? SKSpriteNode, let playerNode = contact.bodyA.node as? SKSpriteNode else {
-                        log.logMessage(message: "Contact between nonexistant objects detected: player \(contact.bodyA) and object \(contact.bodyB) Initiated")
+                        log.log("Contact between nonexistant objects detected: player \(contact.bodyA) and object \(contact.bodyB) Initiated")
                         return
                     }
                     objectCollidedWithPlayer(object: objectNode, player: playerNode)
 
                 } else if isPlayerBodyB(contact: contact) {
                     guard let objectNode = contact.bodyA.node as? SKSpriteNode, let playerNode = contact.bodyB.node as? SKSpriteNode else {
-                        log.logMessage(message: "Contact between nonexistant objects detected: player \(contact.bodyB) and object \(contact.bodyA) Initiated")
+                        log.log("Contact between nonexistant objects detected: player \(contact.bodyB) and object \(contact.bodyA) Initiated")
                         return
                     }
                     objectCollidedWithPlayer(object: objectNode, player: playerNode)
@@ -346,32 +304,32 @@
                     theMonster.increaseScore(points: GameBalanceConstants.MINOR_HIT)
                     playPlayerHurtSound()
                     object.removeFromParent()
-                    log.logMessage(message: "\(ImageNameConstants.BAT_SPRITE_NAME) collided with Player")
+                    log.log("\(ImageNameConstants.BAT_SPRITE_NAME) collided with Player")
 
                 case ImageNameConstants.GHOST_SPRITE_NAME:
                     thePlayer.decreaseScore(points: GameBalanceConstants.MINOR_HIT)
-                    log.logMessage(message: "\(ImageNameConstants.GHOST_SPRITE_NAME) collided with Player")
+                    log.log("\(ImageNameConstants.GHOST_SPRITE_NAME) collided with Player")
                     playPlayerHurtSound()
                     object.removeFromParent()
 
                 case ImageNameConstants.TRASH_CAN_SPRITE_NAME:
                     thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
                     theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-                    log.logMessage(message: "\(ImageNameConstants.TRASH_CAN_SPRITE_NAME) collided with Player")
+                    log.log( "\(ImageNameConstants.TRASH_CAN_SPRITE_NAME) collided with Player")
 
                 case ImageNameConstants.OIL_SLICK_SPRITE_NAME:
                     thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
                     theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-                    log.logMessage(message: "\(ImageNameConstants.OIL_SLICK_SPRITE_NAME) collided with Player")
+                    log.log("\(ImageNameConstants.OIL_SLICK_SPRITE_NAME) collided with Player")
 
                 case ImageNameConstants.SPIDER_SPRITE_NAME:
                     thePlayer.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
                     theMonster.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
-                    log.logMessage(message: "\(ImageNameConstants.SPIDER_SPRITE_NAME) collided with Player")
+                    log.log("\(ImageNameConstants.SPIDER_SPRITE_NAME) collided with Player")
                     playPlayerHurtSound()
                     object.removeFromParent()
 
-                default: log.logMessage(message: "ERROR: Collision Not Supposed to Happen")
+                default: log.log("ERROR: Collision Not Supposed to Happen")
                 }
             }
 
@@ -398,7 +356,7 @@
 
             func touchDown(atPoint pos: CGPoint) {
                 let message = "User touched down at [\(Int(pos.x)), \(Int(pos.y))]"
-                log.logMessage(message: message)
+                log.log(message)
             }
 
             func selectNodeForTouch(touchLocation: CGPoint) {
@@ -412,17 +370,17 @@
                         } else {
                             run(SKAction.run { self.view?.presentScene(GameScene(size: self.size)) })
                         }
-                        log.logMessage(message: "Reset Button Activated")
+                        log.log("Reset Button Activated")
                     }
 
                     if touchedNode.name == ImageNameConstants.PAUSE_BUTTON_SPRITE_NAME {
                         if self.scene?.view?.isPaused ?? false {
                             self.scene?.view?.isPaused = false
-                            log.logMessage(message: "Game Unpaused")
+                            log.log("Game Unpaused")
 
                         } else {
                             self.scene?.view?.isPaused = true
-                            log.logMessage(message: "Game Paused")
+                            log.log("Game Paused")
                         }
                     }
 
@@ -430,13 +388,13 @@
                         if GameBalanceConstants.debugMode {
                             GameBalanceConstants.debugMode = false
                             GameBalanceConstants.switchDebugMode(view: self.view!)
-                            log.logMessage(message: "DebugMode Turned Off")
+                            log.log("DebugMode Turned Off")
                             labelNode.removeFromParent()
 
                         } else {
                             GameBalanceConstants.debugMode = true
                             GameBalanceConstants.switchDebugMode(view: self.view!)
-                            log.logMessage(message: "DebugMode Turned On")
+                            log.log("DebugMode Turned On")
                             enableStatusLabel()
 
                         }
@@ -452,7 +410,7 @@
                                 activateTrashCan(trashSprite: touchedNode)
                             }
                         }
-                        log.logMessage(message: "Trash Can node distance from Player [\(touchedNode.position.distance(point: (thePlayer.sprite.physicsBody?.node?.position)!))]")
+                        log.log("Trash Can node distance from Player [\(touchedNode.position.distance(point: (thePlayer.sprite.physicsBody?.node?.position)!))]")
                     }
                     if touchedNode.name == ImageNameConstants.OIL_SLICK_SPRITE_NAME {
 
@@ -464,7 +422,7 @@
                                 activateOilSlick(oilSprite: touchedNode)
                             }
                         }
-                        log.logMessage(message: "Trash Can node distance from Player [\(touchedNode.position.distance(point: (thePlayer.sprite.physicsBody?.node?.position)!))]")
+                        log.log("Trash Can node distance from Player \(touchedNode.position.distance(point: (thePlayer.sprite.physicsBody?.node?.position)!))]")
                     }
                 }
             }
@@ -490,7 +448,7 @@
                 thePlayer.increaseScore(points: GameBalanceConstants.CRITICAL_HIT)
                 theMonster.decreaseScore(points: GameBalanceConstants.CRITICAL_HIT)
                 node.zRotation = .pi
-                log.logMessage(message: "Critical Hit Activated")
+                log.log("Critical Hit Activated")
             }
 
             func playJumpSound() {
@@ -502,7 +460,7 @@
             //Activates Trashcan Sprite and does his effects
             func activateTrashCan(trashSprite: SKNode) {
                 guard let sprite = trashSprite as? SKSpriteNode else {
-                    log.logMessage(message: "Trash sprite was nil!")
+                    log.log("Trash sprite was nil!")
                     return
                 }
                 AnimationUtils.animateTipTrash(trashSprite: sprite)
@@ -510,20 +468,20 @@
                 theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
                 run(SKAction.playSoundFileNamed("glassbreak.mp3", waitForCompletion: false))
                 playMonsterHurtSound()
-                log.logMessage(message: "Player used Trash Can")
+                log.log("Player used Trash Can")
             }
 
             func activateOilSlick(oilSprite: SKNode) {
                 thePlayer.increaseScore(points: GameBalanceConstants.MEDIUM_HIT)
                 theMonster.decreaseScore(points: GameBalanceConstants.MEDIUM_HIT)
                 guard let sprite = oilSprite as? SKSpriteNode else {
-                    log.logMessage(message: "Trash sprite was nil!")
+                    log.log("Trash sprite was nil!")
                     return
                 }
                 repeatActions(functionToRepeat: { AnimationUtils.animateOilFire(oilSprite: sprite) }, waitInterval: 0.1)
                 run(SKAction.playSoundFileNamed("sizzle.mp3", waitForCompletion: false))
                 playMonsterHurtSound()
-                log.logMessage(message: "Player used Oil Slick")
+                log.log("Player used Oil Slick")
             }
 
             /**************************Player Swipe Functions**************************/
@@ -533,8 +491,8 @@
              *
              */
             func swipedUp(gesture: UISwipeGestureRecognizer) {
-                log.logMessage(message: "Player Position: [\(Int((thePlayer.sprite.position.y)))]")
-                log.logMessage(message: "Where Player Needs to Be to Jump: [\(Int((self.size.height * PLAYER_START_HEIGHT_ADJUSTMENT)))]")
+                log.log("Player Position: [\(Int((thePlayer.sprite.position.y)))]")
+                log.log("Where Player Needs to Be to Jump: [\(Int((self.size.height * PLAYER_START_HEIGHT_ADJUSTMENT)))]")
 
                 if GameTime.isJumpActionValid() == false {
                     return

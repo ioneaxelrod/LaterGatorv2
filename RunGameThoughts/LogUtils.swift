@@ -17,7 +17,7 @@ class Logger {
     //there can only be one
 
     private init() {
-        logMessage(message: "Game Logger Activated")
+        log("Game Logger Activated")
     }
 
     static func getLogger() -> Logger {
@@ -31,7 +31,7 @@ class Logger {
         return ""
     }
 
-    func logMessage(message: String) {
+    func log(_ message: String) {
         let logMessage = baseLineLogger() + "    " + message
         print(logMessage)
     }

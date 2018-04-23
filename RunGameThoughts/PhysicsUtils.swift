@@ -18,7 +18,7 @@ class PhysicsUtils {
     static let BoundaryCategory: UInt32 = 0b1000 // 8
 
     static func setCollisionProperties(sprite: SKSpriteNode, category: UInt32, contactTest: UInt32, collision: UInt32 = 0) {
-        Logger.getLogger().logMessage(message: "Collision Properties for: \(sprite.name ?? ""). Category: \(category). Contact: \(contactTest). Collision:  \(collision)")
+        Logger.getLogger().log("Collision Properties for: \(sprite.name ?? ""). Category: \(category). Contact: \(contactTest). Collision:  \(collision)")
 
         sprite.physicsBody?.categoryBitMask = category
         sprite.physicsBody?.contactTestBitMask = contactTest // sends notification of contact, calls didbegin

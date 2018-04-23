@@ -62,7 +62,7 @@ class GameOverScene: SKScene {
     }
 
     func tapScreen() {
-        log.logMessage(message: "Tapped Screen Screen")
+        log.log("Tapped Screen Screen")
         run(
                 SKAction.run {
                     self.view?.presentScene(TitleScreenScene(size: self.size))
