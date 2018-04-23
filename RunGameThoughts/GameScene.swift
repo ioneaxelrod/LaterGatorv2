@@ -46,6 +46,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         log.setLogger(monster: theMonster, player: thePlayer)
         log.logMessage(message: "Screen Width: [\(self.size.width)]    Screen Height:[\(self.size.height)]")
+        
+        log.logMessage(message: "\(thePlayer.sprite.physicsBody!.categoryBitMask)")
+        
+        
         // Physics
         physicsWorld.contactDelegate = self
         
@@ -240,15 +244,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             log.logMessage(message: "Animate Bat")
             repeatActions(functionToRepeat: { AnimationUtils.animateBatFlap(batSprite: obstacle.sprite) }, waitInterval: 0.05)
         }
-        
         if obstacle.sprite.name == ImageNameConstants.SPIDER_SPRITE_NAME {
             log.logMessage(message: "Animate Spider")
             repeatActions(functionToRepeat: { AnimationUtils.animateSpiderSkitter(spiderSprite: obstacle.sprite) }, waitInterval: 0.05)
         }
-        
     
         obstacle.glide(point: CGPoint(x: -centerOfSprite, y: randomY))
-        
         // glide is the actual moving of the sprite
         
     }
@@ -264,7 +265,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch ImageNameConstants.items[randomIndex] {
             case ImageNameConstants.GHOST_SPRITE_NAME:
                 return Ghost()
-        
             case ImageNameConstants.TRASH_CAN_SPRITE_NAME:
                 return TrashCan()
             case ImageNameConstants.BAT_SPRITE_NAME:
@@ -337,11 +337,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  *
  */
     func monsterMove() {
-        let monsterXCoord
-                = self.size.width / 2.5 * CGFloat(theMonster.score) * MONSTER_MOVEMENT_RATIO_ADJUSTMENT - theMonster.sprite.size.width / 2
+        let monsterXCoord = self.size.width / 2.5 * CGFloat(theMonster.score) * MONSTER_MOVEMENT_RATIO_ADJUSTMENT - theMonster.sprite.size.width / 2
         let monsterYCoord = theMonster.sprite.size.height / 2
         let monsterMovement = SKAction.move(to: CGPoint(x: monsterXCoord, y: monsterYCoord), duration: GameTime.TIME_MONSTER_IS_MOVING)
         theMonster.sprite.run(monsterMovement)
+        log.logMessage(message: "Monster Position: \(theMonster.sprite.position)")
     }
     
     /* Update Label
@@ -686,5 +686,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func distanceMoved(d1: CGFloat, d2: CGFloat) -> CGFloat {
         return abs(d1 - d2) * 0.5
     }
+    
+    
     
 }

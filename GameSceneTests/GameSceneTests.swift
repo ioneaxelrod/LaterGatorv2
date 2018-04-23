@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SpriteKit
+@testable import RunGameThoughts
 
 class GameSceneTests: XCTestCase {
     
@@ -20,16 +22,85 @@ class GameSceneTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testDidMove() {
+        let frame = CGSize(width: 1334, height: 750)
+        let testScene = GameScene(size: frame)
+        testScene.didMove(to: SKView())
+
+        
+        
+        
+        
+        
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    override func didMove(to view: SKView) {
+//        if GameBalanceConstants.debugMode {
+//            let skView = self.view!
+//            skView.showsFPS = true
+//            skView.showsNodeCount = true
+//            skView.showsPhysics = true
+//            enableStatusLabel()
+//        }
+//
+//        log.setLogger(monster: theMonster, player: thePlayer)
+//        log.logMessage(message: "Screen Width: [\(self.size.width)]    Screen Height:[\(self.size.height)]")
+//
+//        log.logMessage(message: "\(thePlayer.sprite.physicsBody!.categoryBitMask)")
+//
+//
+//        // Physics
+//        physicsWorld.contactDelegate = self
+//
+//        // Background Color
+//        backgroundColor = SKColor.white
+//
+//        // Background Music
+//        backgroundMusic.autoplayLooped = true
+//        addChild(backgroundMusic)
+//
+//        // Gesture
+//        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipedUp))
+//        swipeUp.direction = .up
+//        view.addGestureRecognizer(swipeUp)
+//
+//        // Sprite Positions
+//        setSpritePositions()
+//
+//        // Place Sprites into Scene
+//        addSpriteChildren()
+//
+//        // Set Up Repeating Functions
+//        runRepeatingFunctions()
+//
+//        // Debug
+//        //addTestObstacles()
+//        // Check If Run
+//        log.logMessage(message: "Game Running")
+//    }
+//
+//    func testMonsterMove() {
+//        let testScene = GameScene()
+//        testScene.theMonster.score = 100
+//
+//        XCTAssertEqual(testScene.theMonster.sprite.position, CGPoint(x: 0,
+//                                                                     y: 0))
+//        testScene.monsterMove()
+//
+//        let monsterXCoord = testScene.size.width / 2.5 * CGFloat(testScene.theMonster.score) * MONSTER_MOVEMENT_RATIO_ADJUSTMENT - testScene.theMonster.sprite.size.width / 2
+//        XCTAssertEqual(testScene.theMonster.sprite.position, CGPoint(x: monsterXCoord,
+//                                                                     y: testScene.theMonster.sprite.size.height/2))
+//
+//
+//
+//    }
+//
+//    func monsterMove() {
+//        let monsterXCoord = self.size.width / 2.5 * CGFloat(theMonster.score) * MONSTER_MOVEMENT_RATIO_ADJUSTMENT - theMonster.sprite.size.width / 2
+//        let monsterYCoord = theMonster.sprite.size.height / 2
+//        let monsterMovement = SKAction.move(to: CGPoint(x: monsterXCoord, y: monsterYCoord), duration: GameTime.TIME_MONSTER_IS_MOVING)
+//        theMonster.sprite.run(monsterMovement)
+//    }
+
     
 }

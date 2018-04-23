@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import RunGameThoughts
 
 class TimeTests: XCTestCase {
     
@@ -20,16 +21,39 @@ class TimeTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testIsSoundPlayValid() {
+        GameTime.timeSinceLastSoundPlay = 10
+        XCTAssert(GameTime.isSoundPlayValid())
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testIsJumpActionValid() {
+        GameTime.timeSinceLastJump = 10
+        XCTAssert(GameTime.isJumpActionValid())
+        
     }
+    
+    func testIsTouchActionValid() {
+        GameTime.timeSinceLastPress = 10
+        XCTAssert(GameTime.isTouchActionValid())
+    }
+    
+    func testUpdateTime() {
+        GameTime.timeSinceLastPress = 1.0
+        GameTime.timeSinceLastJump = 1.0
+        GameTime.timeSinceLastSoundPlay = 1.0
+        GameTime.updateTime()
+        
+        XCTAssertEqual(GameTime.timeSinceLastPress, 1.1)
+        XCTAssertEqual(GameTime.timeSinceLastJump, 1.1)
+        XCTAssertEqual(GameTime.timeSinceLastSoundPlay, 1.1)
+        
+    }
+    
+//    static func updateTime() {
+//        timeSinceLastPress += TIME_INTERVAL_CHECK_INCREMENT
+//        timeSinceLastSoundPlay += TIME_INTERVAL_CHECK_INCREMENT
+//        timeSinceLastJump += TIME_INTERVAL_CHECK_INCREMENT
+//    }
+
     
 }

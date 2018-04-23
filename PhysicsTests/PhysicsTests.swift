@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SpriteKit
+@testable import RunGameThoughts
 
 class PhysicsTests: XCTestCase {
     
@@ -20,16 +22,53 @@ class PhysicsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSetPlayerCollision() {
+        let testSprite = SKSpriteNode(imageNamed: "pixiegirl1")
+        testSprite.physicsBody = SKPhysicsBody(rectangleOf: testSprite.size)
+        PhysicsUtils.setPlayerCollision(sprite: testSprite)
+        
+        XCTAssertEqual(testSprite.physicsBody?.categoryBitMask, 1)
+        XCTAssertEqual(testSprite.physicsBody?.contactTestBitMask, 4)
+        XCTAssertEqual(testSprite.physicsBody?.collisionBitMask, 0)
+    
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testSetCollisionProperties() {
+        let testSprite = SKSpriteNode(imageNamed: "pixiegirl1")
+        testSprite.physicsBody = SKPhysicsBody(rectangleOf: testSprite.size)
+        PhysicsUtils.setCollisionProperties(sprite: testSprite,
+                               category: 1,
+                               contactTest: 1,
+                               collision: 1)
+        
+        XCTAssertEqual(testSprite.physicsBody?.categoryBitMask, 1)
+        XCTAssertEqual(testSprite.physicsBody?.contactTestBitMask, 1)
+        XCTAssertEqual(testSprite.physicsBody?.collisionBitMask, 1)
+
     }
+    
+    func testSetMonsterCollision() {
+        let testSprite = SKSpriteNode(imageNamed: "pixiegirl1")
+        testSprite.physicsBody = SKPhysicsBody(rectangleOf: testSprite.size)
+        PhysicsUtils.setMonsterCollision(sprite: testSprite)
+    
+        XCTAssertEqual(testSprite.physicsBody?.categoryBitMask, 2)
+        XCTAssertEqual(testSprite.physicsBody?.contactTestBitMask, 4)
+        XCTAssertEqual(testSprite.physicsBody?.collisionBitMask, 0)
+        
+    }
+    
+    func testSetObstacleCollision() {
+        let testSprite = SKSpriteNode(imageNamed: "pixiegirl1")
+        testSprite.physicsBody = SKPhysicsBody(rectangleOf: testSprite.size)
+        PhysicsUtils.setObstacleCollision(sprite: testSprite)
+    
+        XCTAssertEqual(testSprite.physicsBody?.categoryBitMask, 4)
+        XCTAssertEqual(testSprite.physicsBody?.contactTestBitMask, 3)
+        XCTAssertEqual(testSprite.physicsBody?.collisionBitMask, 0)
+    }
+    
+    
+    
     
 }

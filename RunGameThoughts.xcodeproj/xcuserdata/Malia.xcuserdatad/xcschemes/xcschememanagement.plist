@@ -4,14 +4,101 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>-[PhysicsTests testSetCollisionProperties].xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>-[PlayerTests testDecreaseScore].xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>-[PlayerTests testIncreaseScore].xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>-[TimeTests testIsSoundPlayValid].xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>All in ModelTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>All in PhysicsTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>All in TimeTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>RunGameThoughts.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>All in GameSceneTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2450227C1EE20E440016F57C</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>2450228A1EE5E1620016F57C</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>245022981EE687E40016F57C</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>245022A61EE68B920016F57C</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>245022B41EE7762C0016F57C</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>24A78DDE1EE1FD17005322EB</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>24A78DEC1EE1FD20005322EB</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
 		<key>24B8129C1EDF62F200172A03</key>
 		<dict>
 			<key>primary</key>

@@ -7,11 +7,14 @@
 //
 
 import XCTest
+@testable import RunGameThoughts
 
 class LoggerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        
+        let log = Logger.getLogger()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -20,16 +23,17 @@ class LoggerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testBaseLineLogger() {
+    
+
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    func baseLineLogger() -> String {
+//        if self.monster != nil || self.player != nil {
+//            return "[M: \(self.monster!.score)] [P: \(self.player!.score)]"
+//        }
+//        return ""
+//    }
+
     
 }

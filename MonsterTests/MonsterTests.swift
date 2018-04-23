@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import RunGameThoughts
 
 class MonsterTests: XCTestCase {
     
@@ -20,16 +21,36 @@ class MonsterTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testCheckMonsterScore() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let monster = Monster()
+        monster.score = 10
+        XCTAssertEqual(monster.checkMonsterScore(), 10)
+        
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testIncrementMove() {
+        let monster = Monster()
+        monster.score = 15
+        monster.incrementMove()
+        XCTAssertEqual(monster.checkMonsterScore(), 20)
     }
+    
+    func testMoveAway() {
+        let monster = Monster()
+        monster.score = 15
+        monster.decreaseScore(points: 5)
+        XCTAssertEqual(monster.checkMonsterScore(), 10)
+    }
+    
+    func testMoveCloser() {
+        let monster = Monster()
+        monster.score = 15
+        monster.increaseScore(points: 5)
+        XCTAssertEqual(monster.checkMonsterScore(), 20)
+    }
+    
+    
     
 }
