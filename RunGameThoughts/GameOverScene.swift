@@ -61,7 +61,7 @@ class GameOverScene: SKScene {
         addChild(gameOver)
     }
 
-    func tapScreen() {
+    @objc func tapScreen() {
         log.log("Tapped Screen Screen")
         run(
                 SKAction.run {

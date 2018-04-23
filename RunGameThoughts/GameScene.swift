@@ -490,7 +490,7 @@
              *
              *
              */
-            func swipedUp(gesture: UISwipeGestureRecognizer) {
+            @objc func swipedUp(gesture: UISwipeGestureRecognizer) {
                 log.log("Player Position: [\(Int((thePlayer.sprite.position.y)))]")
                 log.log("Where Player Needs to Be to Jump: [\(Int((self.size.height * PLAYER_START_HEIGHT_ADJUSTMENT)))]")
 

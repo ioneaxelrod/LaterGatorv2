@@ -90,7 +90,7 @@ class TitleScreenScene: SKScene {
         ))
     }
 
-    func tapScreen() {
+    @objc func tapScreen() {
         log.log("Tapped Screen")
         run(
             SKAction.run {
