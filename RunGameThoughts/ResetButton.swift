@@ -10,9 +10,9 @@ import Foundation
 import SpriteKit
 
 class ResetButton {
-    
+
     var sprite = SKSpriteNode(imageNamed: ImageNameConstants.RESET_BUTTON_SPRITE_NAME)
-    
+
     init() {
         self.sprite.name = ImageNameConstants.RESET_BUTTON_SPRITE_NAME
         self.sprite.size = CGSize(width: self.sprite.size.width * 0.1,

@@ -26,7 +26,7 @@ extension CGPoint {
     func distance(point: CGPoint) -> CGFloat {
         let dx = self.x - point.x
         let dy = self.y - point.y
-        return sqrt(dx * dx + dy * dy);
+        return sqrt(dx * dx + dy * dy)
     }
 }
 
@@ -37,7 +37,6 @@ extension CGPoint {
  *
  *
  */
-
 
 //Label Defaults
 let LABEL_LOCATION: CGFloat = 0.8
@@ -78,14 +77,3 @@ let POSITION_FOR_BACKGROUND_ITEMS: CGFloat = -1.0
 //Random Movement Speed
 let RANDOM_MOVE_SPEED_MIN: CGFloat = 2.0
 let RANDOM_MOVE_SPEED_MAX: CGFloat = 4.0
-
-
-
-
-
-
-
-
-
-
-

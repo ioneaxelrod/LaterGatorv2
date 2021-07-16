@@ -10,15 +10,10 @@ import Foundation
 import SpriteKit
 
 class Background {
-
-//    let sprites: [SKSpriteNode] = [SKSpriteNode(imageNamed: "background1"),
-//                                   SKSpriteNode(imageNamed: "background2"),
-//                                   SKSpriteNode(imageNamed: "background3")]
-    
     let sprites: [SKSpriteNode] = [SKSpriteNode(imageNamed: "newbackgroundscalar1"),
                                    SKSpriteNode(imageNamed: "newbackgroundscalar1"),
                                    SKSpriteNode(imageNamed: "newbackgroundscalar1")]
-    
+
     init() {
         for sprite in sprites {
             sprite.name = "background"
